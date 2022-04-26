@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "@fontsource/roboto";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import styled from "styled-components";
+import { Header, Navigation } from "./components";
+import { Home, Product } from "./pages";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<Wrapper>
+			<Router>
+				<Header />
+
+				<Content>
+					<Navigation />
+
+					<Main>
+						<Routes>
+							<Route path="/" element={<Home />} />
+							<Route path="/product" element={<Product />} />
+						</Routes>
+					</Main>
+				</Content>
+			</Router>
+		</Wrapper>
+	);
 }
 
 export default App;
+
+const Wrapper = styled.div`
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+`;
+
+const Content = styled.section`
+	flex: 1;
+	display: flex;
+	padding: 1rem;
+	gap: 0.5rem;
+
+	@media (max-width: 500px) {
+		flex-direction: column;
+	}
+`;
+
+const Main = styled.main`
+	background-color: #eee;
+	flex: 1;
+`;
